@@ -1,0 +1,56 @@
+setwd("E://R/MSI/ulang")
+datams <- read.csv("Y.csv")
+
+head(datams)
+
+MSI <- function(x) #untuk lima point
+{
+  new_x<-x; 
+  new_x_table <- table(new_x) 
+{
+  new_x_asvector <- function (new_x) 
+    as.vector(new_x/sum(new_x)) 
+}
+  asvector_x_table <- new_x_asvector (new_x_table);
+  cum_x_asvector_table <- cumsum(asvector_x_table); 
+  qnorm_x_cum <- qnorm(cum_x_asvector_table[c(1,2,3,4,5)]); 
+  dnorm_x_qnorm <- dnorm(qnorm_x_cum[c(1,2,3,4,5)]);
+  Mod_x <- c((0-dnorm_x_qnorm[1])/(cum_x_asvector_table[1]-0),
+             (dnorm_x_qnorm[1]-dnorm_x_qnorm[2])/(cum_x_asvector_table[2]-
+                                                  cum_x_asvector_table[1]),
+             (dnorm_x_qnorm[2]-dnorm_x_qnorm[3])/(cum_x_asvector_table[3]-
+                                                  cum_x_asvector_table[2]),
+             (dnorm_x_qnorm[3]-dnorm_x_qnorm[4])/(cum_x_asvector_table[4]-
+                                                  cum_x_asvector_table[3]),
+             (dnorm_x_qnorm[4]-dnorm_x_qnorm[5])/(cum_x_asvector_table[5]-
+                                                  cum_x_asvector_table[4])
+            ) 
+  
+
+  Big_x <- c((Mod_x[1]+abs(Mod_x[1])+1),
+            (Mod_x[2]+abs(Mod_x[1])+1),
+            (Mod_x[3]+abs(Mod_x[1])+1),
+            (Mod_x[4]+abs(Mod_x[1])+1),
+            (Mod_x[5]+abs(Mod_x[1])+1))
+  new.list <- 
+    list(Skor_1=Big_x[1],Skor_2=Big_x[2],Skor_3=Big_x[3],
+         Skor_4=Big_x[4],Skor_5=Big_x[5]
+        ) 
+  return(new.list)    
+}
+MSI(datams)
+data1<-read.csv("data.csv")
+y<-data1$Y
+x1<-data1$X1
+x2<-data1$X2
+x3<-data1$X3
+x4<-data1$X4
+x5<-data1$X5
+
+
+MSI(y)
+MSI(x1)
+MSI(x2)
+MSI(x3)
+MSI(x4)
+MSI(x5)
